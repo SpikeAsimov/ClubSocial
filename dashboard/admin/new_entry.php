@@ -2,184 +2,130 @@
 require '../../include/db_conn.php';
 page_protect();
 ?>
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
     <title>Club Social Rubgy | Nuevo Usuario</title>
-    <link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-    <link href="a1style.css" type="text/css" rel="stylesheet">
-    <style>
-    	.page-container .sidebar-menu #main-menu li#regis > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
-       #boxx
-	{
-		width:220px;
-	}</style>
+
+
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Arroyo Walter">
 
 </head>
-      <body class="page-body  page-fade" onload="collapseSidebar()">
+      <body>
 
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
-			
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.php">
-					<img src="../../images/logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- agrega la clase "with-animation" si desea que la barra lateral tenga animación durante la transición de expansión / contracción -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-							
-			
-		
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
+      <?php include('elements/navbar.php'); ?>
 
-    		<div class="main-content">
-		
-				<div class="row">
-					
-					<!-- Información de perfil y notificaciones -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
-					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-						
-						<ul class="list-inline links-list pull-right">
+      <div class="container-fluid">
+          <div class="row">
+              <?php include 'nav_.php'; ?>
 
-							<li>Bienvenid@ <?php echo $_SESSION['full_name']; ?> 
-							</li>
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-					
-				</div>
+                  <div class="col-10 p-3">
+                      <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="new_entry.php">Usuarios</a></li>
+                          <li class="breadcrumb-item active">Nuevo Usuario</li>
+                      </ol>
 
-		
-        	<h3>Ingreso de Nuevo Usuario</h3>
+                      <form class="row g-3" action="new_submit.php" method="post" name="form1">
+                          <legend>REGISTRAR NUEVO USUARIO</legend>
+                          <div class="form-group col-12">
+                              <h5 for="" class="form-label mt-0">ID MEMBRESIA</h5>
+                              <input type="text" readonly class="form-control-plaintext" name="m_id" id="staticEmail" value="<?php echo time(); ?>" required>
 
-		<hr />
-        
-        <div class="a1-container a1-small a1-padding-32" style="margin-top:2px; margin-bottom:2px;">
-        <div class="a1-card-8 a1-light-gray" style="width:500px; margin:0 auto;">
-		<div class="a1-container a1-dark-gray a1-center">
-        	<h6>NUEVO INGRESO</h6>
-        </div>
-       <form id="form1" name="form1" method="post" class="a1-container" action="new_submit.php">
-         <table width="100%" border="0" align="center">
-         <tr>
-           <td height="35"><table width="100%" border="0" align="center">
-           	 <tr>
-           	   <td height="35">ID MEMBRESÍA:</td>
-           	   <td height="35"><input type="text" id="boxx" name="m_id" value="<?php echo time(); ?>" readonly required/></td>
-         	   </tr>
-			   
-			   <tr>
-               <td height="35">NOMBRE:</td>
-               <td height="35"><input name="u_name" id="boxx"  required/></td>
-             </tr>
-             <tr>
-               <td height="35">DIRECCIÓN:</td>
-               <td height="35"><input  name="street_name" id="boxx" /></td>
-             </tr>
-             <tr>
-               <td height="35">CIUDAD:</td>
-               <td height="35"><input type="text" name="city" id="boxx" required ></td>
-             </tr>
-             <tr>
-               <td height="35">CODIGO POSTAL:</td>
-               <td height="35"><input type="number" name="zipcode" id="boxx" maxlength="6"  ></td>
-             </tr>
-            <tr>
-               <td height="35">DEPARTAMENTO:</td>
-               <td height="35"><input type="text" name="state" id="boxx" size="30"></td>
-             </tr>
-            <tr>
-               <td height="35">GÉNERO:</td>
-               <td height="35"><select name="gender" id="boxx" required>
+                              <label for="" class="form-label mt-3">NOMBRE Y APELLIDO</label>
+                              <input type="text" name="u_name" class="form-control" id="" placeholder="" required>
+                          </div>
 
-					<option value="">--Favor Seleccionar--</option>
-					<option value="Hombre">Hombre</option>
-					<option value="Mujer">Mujer</option>
-				</select></td>
-             </tr>
-            <tr>
-               <td height="35">FECHA DE NACIMIENTO:</td>
-               <td height="35"><input type="date" name="dob" id="boxx" required/ size="30"></td>
-             </tr>
-			 <tr>
-               <td height="35">No TELÉFONO:</td>
-               <td height="35"><input type="number" name="mobile" id="boxx" maxlength="10" required/ size="30"></td>
-             </tr>
-			  <tr>
-               <td height="35">CORREO ELECTRÓNICO:</td>
-               <td height="35"><input type="email" name="email" id="boxx" size="30"></td>
-             </tr>
-			 <tr>
-               <td height="35">FECHA DE INGRESO:</td>
-               <td height="35"><input type="date" name="jdate" id="boxx" required size="30"></td>
-             </tr>
-             <tr>
-               <td height="35">PLAN:</td>
-               <td height="35"><select name="plan" id="boxx" required onchange="myplandetail(this.value)">
-					<option value="">--Favor Seleccionar--</option>
-					<?php
-						$query="select * from plan where active='yes'";
-						$result=mysqli_query($con,$query);
-						if(mysqli_affected_rows($con)!=0){
-							while($row=mysqli_fetch_row($result)){
-								echo "<option value=".$row[0].">".$row[1]."</option>";
-							}
-						}
+                          <div class="form-group col-4">
+                              <label for="" class="form-label mt-3">DIRECCIÓN</label>
+                              <input type="text" name="street_name" class="form-control" id="" placeholder="" required>
 
-					?>
-					
-				</select></td>
-             </tr>
-			
-	    <tbody id="plandetls">
-             
-            </tbody>
+                              <label for="" class="form-label mt-3">DEPARTAMENTO</label>
+                              <input type="text" name="state" class="form-control" id="" size="30" placeholder="" required value="La Rioja">
 
-             <tr>
-             <tr>
-               <td height="35">&nbsp;</td>
-               <td height="35"><input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="Registrar" >
-                 <input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar"></td>
-             </tr>
-           </table></td>
-         </tr>
-         </table>
-       </form>
-    </div>
-    </div>   
+
+                          </div>
+
+                          <div class="form-group col-4">
+                              <label for="" class="form-label mt-3">FECHA DE NACIMIENTO</label>
+                              <input type="date" class="form-select" name="dob" required size="30">
+
+                              <label for="" class="form-label mt-3">CIUDAD</label>
+                              <input type="text" name="city" class="form-control" id="" placeholder="" required value="La Rioja">
+
+                          </div>
+
+                          <div class="form-group col-4">
+                              <label for="" class="form-label mt-3">GENERO</label>
+                              <select name="gender" class="form-select" required>
+                                  <option value="">--Seleccionar--</option>
+                                  <option value="Hombre">Hombre</option>
+                                  <option value="Mujer">Mujer</option>
+                             </select>
+
+                              <label for="" class="form-label mt-3">CODIGO POSTAL</label>
+                              <input type="number" name="zipcode" class="form-control" id="" maxlength="6" required value="5300">
+
+                          </div>
+
+                          <div class="form-group col-6">
+                              <label for="" class="form-label mt-3">TELEFONO</label>
+                              <input type="number" name="mobile" class="form-control" maxlength="10" size="30" required>
+                          </div>
+
+                          <div class="form-group col-6">
+                              <label for="" class="form-label mt-3">CORREO ELECTRÓNICO</label>
+                              <input type="email" class="form-control" id="" name="email" size="30" aria-describedby="emailHelp" placeholder="">
+                          </div>
+
+
+                          <div class="form-group col-3">
+                              <label for="" class="form-label mt-3">FECHA DE INGRESO</label>
+                              <input type="date" class="form-select" name="jdate" required size="30">
+                          </div>
+
+                          <div class="form-group col-3">
+                              <label for="" class="form-label mt-3">PLAN</label>
+                                  <select name="plan" id="boxx" class="form-select" required onchange="myplandetail(this.value)">
+                                          <option value="">-- Seleccionar --</option>
+                                          <?php
+                                          $query="select * from plan where active='yes'";
+                                          $result=mysqli_query($con,$query);
+                                          if(mysqli_affected_rows($con)!=0){
+                                              while($row=mysqli_fetch_row($result)){
+                                                  echo "<option value=".$row[0].">".$row[1]."</option>";
+                                              }
+                                          }
+
+                                          ?>
+
+                                    </select>
+                          </div>
+
+                          <div class="form-group col-6" id="plandetls">
+
+                          </div>
+
+                          <div class="form-group col-12 p-5 pull-right">
+                              <input class="btn btn-outline-success m-3" type="submit" name="submit" id="submit" value="Registrar" >
+                              <input class="btn btn-outline-danger m-3" type="reset" name="reset" id="reset" value="Borrar">
+
+                          </div>
+
+
+
+
+                      </form>
+                  </div>
+          </div>
+      </div>
+
         
         <script>
         	function myplandetail(str){
@@ -210,6 +156,9 @@ page_protect();
 			<?php include('footer.php'); ?>
     	</div>
 
-    </body>
+
+
+
+      </body>
 </html>
 

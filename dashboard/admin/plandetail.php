@@ -6,14 +6,25 @@ $res=mysqli_query($con,$query);
 if($res){
 	$row=mysqli_fetch_array($res,MYSQLI_ASSOC);
 	// echo "<tr><td>".$row['amount']."</td></tr>";
-	echo "<tr>
-		<td height='35'>Monto:</td>
-		<td height='35'>&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input id='boxx' type='text' value='$".$row['amount']."' readonly></td></tr>
-		<tr>
-		<td height='35'>Validez:</td>
-		<td height='35'>&nbsp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<input type='text' id='boxx' value='".$row['validity']." Month' readonly></td>
-		</tr>
+
+	echo "
+        
+	        <div class=\"form-group \">
+              <fieldset>
+                <label class=\"form-label mt-4\" for=\"readOnlyInput\">Monto:</label>
+                <input class=\"form-control\" id=\"readOnlyInput\" type=\"text\" value='$".$row['amount']."' readonly=\"\">
+              </fieldset>
+            </div>
+            <div class=\"form-group \">
+              <fieldset>
+                <label class=\"form-label mt-4\" for=\"readOnlyInput\">Validez:</label>
+                <input class=\"form-control\" id=\"readOnlyInput\" type=\"text\" value='".$row['validity']." Mes/es' readonly=\"\">
+              </fieldset>
+            </div>
+        
+            
 	";
+
 }
 
 ?>
