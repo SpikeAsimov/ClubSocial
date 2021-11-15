@@ -5,146 +5,105 @@ page_protect();
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
-    <title>ConfiguroWeb | Payments</title>
-    <link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-    <link href="a1style.css" type="text/css" rel="stylesheet">
-    <style>
-    	.page-container .sidebar-menu #main-menu li#paymnt > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
+	<title>Club Social Rubgy | Nuevo Usuario</title>
 
-    </style>
+	
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Arroyo Walter">
+
 
 </head>
-      <body class="page-body  page-fade" onload="collapseSidebar()">
+<body>
+		<?php include('elements/navbar.php'); ?>
 
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
-			
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.php">
-					<img src="https://www.arroyowalter.site/SistemaClubSocial/images/Logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-							
-			
+		<div class="container-fluid">
+			<div class="row">
+				<?php include 'nav_.php'; ?>
+
+				<div class="col-10 p-3">
+					<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="payments.php">Pagos</a></li>
+							<li class="breadcrumb-item active">Gestión de Pagos</li>
+					</ol>
+
+					<legend>PAGOS</legend>
 		
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
+						<table class="table table-hover table-bordered datatable" id="table-1" border=1>
+							<thead>
+								<tr>
+									<th scope="col">Nro.</th>
+									<th scope="col">Fecha de Expiración</th>
+									<th scope="col">Nombre</th>
+									<th scope="col">ID de Miembro</th>
+									<th scope="col">Teléfono</th>
+									<th scope="col">Correo</th>
+									<th scope="col">Género</th>
+									<th scope="col">Acción</th>
+								</tr>
+							</thead>
 
-    		<div class="main-content">
-		
-				<div class="row">
-					
-					<!-- Profile Info and Notifications -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
-					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-						
-						<ul class="list-inline links-list pull-right">
+								<tbody>
 
-							<li>Bienvenid@ <?php echo $_SESSION['full_name']; ?> 
-							</li>								
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-					
+								<?php
+
+
+									$query  = "select * from enrolls_to where renewal='yes' ORDER BY expire";
+									//echo $query;
+									$result = mysqli_query($con, $query);
+									$sno    = 1;
+
+									if (mysqli_affected_rows($con) != 0) {
+										while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+											$uid   = $row['uid'];
+											$planid=$row['pid'];
+											$query1  = "select * from users WHERE userid='$uid'";
+											$result1 = mysqli_query($con, $query1);
+											if (mysqli_affected_rows($con) == 1) {
+												while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
+													
+													echo "<tr><td>".$sno."</td>";
+													echo "<td>" . $row['expire'] . "</td>";
+													echo "<td>" . $row1['username'] . "</td>";
+													echo "<td>" . $row1['userid'] . "</td>";
+													echo "<td>" . $row1['mobile'] . "</td>";
+													echo "<td>" . $row1['email'] . "</td>";
+													echo "<td>" . $row1['gender'] . "</td>";
+													
+													$sno++;
+													
+													echo "<td><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
+													<input type='hidden' name='planID' value='" . $planid . "'/><input type='submit' value='Agregar Pago ' class='btn btn-info'/></form></td></tr>";
+													
+													$uid = 0;
+												}
+											}
+										}
+									}
+
+									?>									
+								</tbody>
+
+						</table>
+
+
 				</div>
+			</div>
+		</div>
 
-		<h2>Pagos</h2>
-
-		<hr />
-		
-		<table class="table table-bordered datatable" id="table-1" border=1>
-			<thead>
-				<tr>
-					<th>Sl.No</th>
-					<th>Fecha de Expiración</th>
-					<th>Nombre</th>
-					<th>ID de Miembro</th>
-					<th>Teléfono</th>
-					<th>Correo</th>
-					<th>Género</th>
-					<th>Acción</th>
-				</tr>
-			</thead>
-
-				<tbody>
-
-				<?php
+  
 
 
-					$query  = "select * from enrolls_to where renewal='yes' ORDER BY expire";
-					//echo $query;
-					$result = mysqli_query($con, $query);
-					$sno    = 1;
-
-					if (mysqli_affected_rows($con) != 0) {
-					    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
-					        $uid   = $row['uid'];
-					        $planid=$row['pid'];
-					        $query1  = "select * from users WHERE userid='$uid'";
-					        $result1 = mysqli_query($con, $query1);
-					        if (mysqli_affected_rows($con) == 1) {
-					            while ($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC)) {
-					                
-					                 echo "<tr><td>".$sno."</td>";
-					                echo "<td>" . $row['expire'] . "</td>";
-					                echo "<td>" . $row1['username'] . "</td>";
-					                echo "<td>" . $row1['userid'] . "</td>";
-					                echo "<td>" . $row1['mobile'] . "</td>";
-					                echo "<td>" . $row1['email'] . "</td>";
-					                echo "<td>" . $row1['gender'] . "</td>";
-					                
-					                $sno++;
-					                
-					                echo "<td><form action='make_payments.php' method='post'><input type='hidden' name='userID' value='" . $uid . "'/>
-					                <input type='hidden' name='planID' value='" . $planid . "'/><input type='submit' class='a1-btn a1-blue' value='Agregar Pago ' class='btn btn-info'/></form></td></tr>";
-									
-					                $uid = 0;
-					            }
-					        }
-					    }
-					}
-
-					?>									
-				</tbody>
-
-		</table>
-
-
-			<?php include('footer.php'); ?>
-    	</div>
+		<?php include('footer.php'); ?>
+    
 
     </body>
 </html>

@@ -4,138 +4,103 @@ page_protect();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
-    <title>ConfiguroWeb | Miembros por Mes</title>
-     <link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-	<link href="a1style.css" rel="stylesheet" type="text/css">
-     <style>
-    	.page-container .sidebar-menu #main-menu li#overviewhassubopen > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
+    <title>Club Social Rubgy | Clientes por Mes</title>
 
-    </style>
+		
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Arroyo Walter">
 
 </head>
-    <body class="page-body  page-fade" onload="collapseSidebar();showMember();">
+<body onload="showMember();">
 
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
-			
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.php">
-					<img src="https://www.arroyowalter.site/SistemaClubSocial/images/Logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-							
-			
-		
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
+	<?php include('elements/navbar.php'); ?>
 
-    		<div class="main-content">
-		
-				<div class="row">
-					
-					<!-- Profile Info and Notifications -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
+	<div class="container-fluid">
+		<div class="row">
+			<?php include 'nav_.php'; ?>
+
+			<div class="col-10 p-3">
+				<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="over_members_month.php">Vistas</a></li>
+							<li class="breadcrumb-item active">Clientes por Mes</li>
+				</ol>
+
+				<legend>CLIENTES POR MES</legend>
+
+				<form class="row">
+					<div class="col-6 p-3">
+
+						<?php
+						// set start and end year range
+						$yearArray = range(2000, date('Y'));
+						?>
+						<!-- displaying the dropdown list -->
+						<select class="form-select" name="year" id="syear">
+							<option value="0">Seleccione el Año</option>
+							<?php
+							foreach ($yearArray as $year) {
+								// if you want to select a particular year
+								$selected = ($year == date('Y')) ? 'selected' : '';
+								echo '<option '.$selected.' value="'.$year.'">'.$year.'</option>';
+							}
+							?>
+						</select>
+
 					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-						
-						<ul class="list-inline links-list pull-right">
+					<div class="col-6 p-3">
 
-							<li>Bienvenid@ <?php echo $_SESSION['full_name']; ?> 
-							</li>							
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
+						<?php
+						// set the month array
+						$formattedMonthArray = array(
+											"01" => "Enero", "02" => "Febrero", "03" => "Marzo", "04" => "Abril",
+											"05" => "Mayo", "06" => "Junio", "07" => "Julio", "08" => "Agosto",
+											"09" => "Septiembre", "10" => "Octubre", "11" => "Noviembre", "12" => "Diciembre",
+										);
+
+						?>
+						<!-- displaying the dropdown list -->
+						<select class="form-select" name="month" id="smonth">
+							<option value="0">Selecciona Mes</option>
+							<?php
+
+							foreach ($formattedMonthArray as $month) {
+								// if you want to select a particular month
+								$mm=implode(array_keys($formattedMonthArray,$month));
+								$selected = ($mm == date('m')) ? 'selected' : '';
+								// if you want to add extra 0 before the month uncomment the line below
+								//$month = str_pad($month, 2, "0", STR_PAD_LEFT);
+								echo '<option '.$selected.' value="'.$mm.'">'.$month.'</option>';
+							}
+							?>
+						</select>
+
 					</div>
+
 					
-				</div>
-
-		<h2>Miembros por Mes</h2>
-
-		<hr />
-
-		
-
-<form>
-	<?php
-	// set start and end year range
-	$yearArray = range(2000, date('Y'));
-	?>
-	<!-- displaying the dropdown list -->
-	<select name="year" id="syear">
-	    <option value="0">Seleccione el Año</option>
-	    <?php
-	    foreach ($yearArray as $year) {
-	        // if you want to select a particular year
-	        $selected = ($year == date('Y')) ? 'selected' : '';
-	        echo '<option '.$selected.' value="'.$year.'">'.$year.'</option>';
-	    }
-	    ?>
-	</select>
-
-	<?php
-	// set the month array
-	$formattedMonthArray = array(
-	                    "01" => "Enero", "02" => "Febrero", "03" => "Marzo", "04" => "Abril",
-	                    "05" => "Mayo", "06" => "Junio", "07" => "Julio", "08" => "Agosto",
-	                    "09" => "Septiembre", "10" => "Octubre", "11" => "Noviembre", "12" => "Diciembre",
-	                );
-
-	?>
-	<!-- displaying the dropdown list -->
-	<select name="month" id="smonth">
-	    <option value="0">Selecciona Mes</option>
-	    <?php
-
-	    foreach ($formattedMonthArray as $month) {
-	        // if you want to select a particular month
-	        $mm=implode(array_keys($formattedMonthArray,$month));
-	        $selected = ($mm == date('m')) ? 'selected' : '';
-	        // if you want to add extra 0 before the month uncomment the line below
-	        //$month = str_pad($month, 2, "0", STR_PAD_LEFT);
-	        echo '<option '.$selected.' value="'.$mm.'">'.$month.'</option>';
-	    }
-	    ?>
-	</select>
-
-	<input type="button" class="a1-btn a1-blue"  style="margin-bottom:5px;" name="search" onclick="showMember();" value="Búsqueda">
-
-</form>
-
-<table id="memmonth" border=1>
-	
-</table>
+					<input type="button" class="btn btn-info m-4"  style="margin-bottom:5px;" name="search" onclick="showMember();" value="Búsqueda">
+										
 
 
+					
+
+				</form>
+
+				<table class="table table-hover table-bordered datatable" id="memmonth" border=1>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+
+    	
 <script>
 
   function showMember(){
@@ -167,9 +132,7 @@ page_protect();
 </script>
 
 			<?php include('footer.php'); ?>
-
-   	</div>
-
+ 
     </body>
 </html>
 

@@ -10,145 +10,80 @@ page_protect();
 <html lang="en">
 <head>
 
-    <title>ConfiguroWeb | Ver Rutina</title>
-    <link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-	<link href="a1style.css" rel="stylesheet" type="text/css">
-	<style>
-    	.page-container .sidebar-menu #main-menu li#routinehassubopen > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
+	<title>Club Social Rubgy | Ver Plan</title>
+	
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
 
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Arroyo Walter">
 
 </head>
-     <body class="page-body  page-fade" onload="collapseSidebar()">
+<body>
+	 	<?php include('elements/navbar.php'); ?>
 
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
+		 <div class="container-fluid">
+			 <div class="row">
+			 	<?php include 'nav_.php'; ?>
+				 <div class="col-10 p-3">
+				 	<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="view_plan.php">Rutinas</a></li>
+							<li class="breadcrumb-item active">Ver Rutinas</li>
+					</ol>
+					<legend>RUTINAS</legend>
+
+					<table class="table table-bordered datatable" id="table-1" border=1>
 			
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.php">
-					<img src="https://www.arroyowalter.site/SistemaClubSocial/images/Logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-							
-			
-		
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
-
-    		<div class="main-content">
-		
-				<div class="row">
+							<tr>
+								<th>Nro.</th>
+								<th>Nombre de Rutina</th>
+								<th>Detalles de Rutina</th>
+							</tr>
 					
-					<!-- Profile Info and Notifications -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
-					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-						
-						<ul class="list-inline links-list pull-right">
+							<tbody>
 
-							<li>Bienvenid@ <?php echo $_SESSION['full_name']; ?> 
-							</li>						
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-					
-				</div>
-
-		
-
-		
-			<h2>Rutinas</h2>
-
-		<hr />
-		
-		<table class="table table-bordered datatable" id="table-1" border=1>
-			
-				<tr>
-					<th>Sl.No</th>
-					<th>Nombre de Rutina</th>
-					<th>Detalles de Rutina</th>
-				</tr>
-		
-				<tbody>
-
-				<?php
+							<?php
 
 
-					$query  = "select * from timetable";
-					//echo $query;
-					$result = mysqli_query($con, $query);
-					$sno    = 1;
+								$query  = "select * from timetable";
+								//echo $query;
+								$result = mysqli_query($con, $query);
+								$sno    = 1;
 
-					if (mysqli_affected_rows($con) != 0) 
-					{
-					    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
-						{
+								if (mysqli_affected_rows($con) != 0) 
+								{
+									while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) 
+									{
 
-					       
-					           
-					                
-					                 echo "<tr><td>".$sno."</td>";
-					                echo "<td>" . $row['tname'] . "</td>";
-					           
-					                
-					                $sno++;
-					                
-					              echo '<td><a href="viewdetailroutine.php?id='.$row['tid'].'"><input type="button" class="a1-btn a1-blue" value="Ver Detalles" ></a></td></tr>';
 									
-					                $uid = 0;
-					            
-					        
-					    }
-					}
+										
+												
+												echo "<tr><td>".$sno."</td>";
+												echo "<td>" . $row['tname'] . "</td>";
+										
+												
+												$sno++;
+												
+											echo '<td><a href="viewdetailroutine.php?id='.$row['tid'].'"><input type="button" class="btn btn-info" value="Ver Detalles" ></a></td></tr>';
+												
+												$uid = 0;
+											
+										
+									}
+								}
 
-					?>									
-				</tbody>
+								?>									
+							</tbody>
 
-		</table>
+					</table>
 
+				 </div>
+			 </div>
+		 </div>
 
-				
-		
-		
-		
-		
-		
-		
-		
-
-			
-
-    	</div>
-
-    </body>
+</body>
 	<?php include('footer.php'); ?>
 </html>
 

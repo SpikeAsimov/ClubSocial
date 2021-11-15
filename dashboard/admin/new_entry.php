@@ -18,8 +18,7 @@ page_protect();
     <meta name="author" content="Arroyo Walter">
 
 </head>
-      <body>
-
+<body>
       <?php include('elements/navbar.php'); ?>
 
       <div class="container-fluid">

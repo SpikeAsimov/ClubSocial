@@ -1,11 +1,11 @@
 
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.php">Club Social Rubgy</a></li>
+    <li class="breadcrumb-item active">Panel de Control</li>
+</ol>
+<div class="row g-3">
 
-<div class="row">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.php">Club Social Rubgy</a></li>
-        <li class="breadcrumb-item active">Panel de Control</li>
-    </ol>
     <div class="col-sm-3"><a href="revenue_month.php">
             <div class="tile-stats tile-red">
                 <div class="icon"><i class="entypo-users"></i></div>
