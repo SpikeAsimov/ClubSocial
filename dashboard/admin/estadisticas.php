@@ -4,14 +4,17 @@
     <li class="breadcrumb-item"><a href="index.php">Club Social Rubgy</a></li>
     <li class="breadcrumb-item active">Panel de Control</li>
 </ol>
-<div class="row g-3">
 
-    <div class="col-sm-3"><a href="revenue_month.php">
-            <div class="tile-stats tile-red">
-                <div class="icon"><i class="entypo-users"></i></div>
-                <div class="num" data-postfix="" data-duration="1500" data-delay="0">
-                    <h2>Dinero recibido este Mes</h2><br>
-                    <?php
+<div class="row g-5 p-5">
+
+<div class="col-3">    
+    <div class="card text-white bg-success mb-4" style="max-width: 20rem; height: 10rem;">
+    <a href="revenue_month" style="text-decoration: none;">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h4 class="card-title">Dinero recibido este Mes</h4>
+            <p class="card-text">
+            <?php
                     date_default_timezone_set('America/Argentina/Buenos_Aires');
                     $date  = date('Y-m');
                     $query = "select * from enrolls_to WHERE  paid_date LIKE '$date%'";
@@ -30,18 +33,21 @@
                         }
                     }
                     echo "$".$revenue;
-                    ?>
-                </div>
-            </div></a>
-    </div>
+            ?>
+            </p>           
+        </div>
+    </a>
+    </div>    
+</div>
 
-
-    <div class="col-sm-3"><a href="table_view.php">
-            <div class="tile-stats tile-green">
-                <div class="icon"><i class="entypo-chart-bar"></i></div>
-                <div class="num" data-postfix="" data-duration="1500" data-delay="0">
-                    <h2>Miembros <br>Totales</h2><br>
-                    <?php
+<div class="col-3">
+    <div class="card text-white bg-danger mb-3" style="max-width: 20rem; height: 10rem;">
+    <a href="table_view.php" style="text-decoration: none;">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h4 class="card-title">Total de Socios</h4>
+            <p class="card-text">
+            <?php
                     $query = "select COUNT(*) from users";
 
                     $result = mysqli_query($con, $query);
@@ -53,15 +59,20 @@
                     }
                     $i = 1;
                     ?>
-                </div>
-            </div></a>
+            </p>
+        </div>
+    </a>
     </div>
+</div>
 
-    <div class="col-sm-3"><a href="over_members_month.php">
-            <div class="tile-stats tile-aqua">
-                <div class="icon"><i class="entypo-mail"></i></div>
-                <div class="num" data-postfix="" data-duration="1500" data-delay="0">
-                    <h2>Usuarios Ingresados este mes</h2><br>
+
+<div class="col-3">
+    <div class="card text-white bg-warning mb-3" style="max-width: 20rem; height: 10rem;">
+        <a href="over_members_month.php" style="text-decoration: none;">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <h4 class="card-title">Socios ingresados este mes</h4>
+                <p class="card-text">
                     <?php
                     date_default_timezone_set("America/Argentina/Buenos_Aires");
                     $date  = date('Y-m');
@@ -77,16 +88,20 @@
                     }
                     $i = 1;
                     ?>
-                </div>
-            </div></a>
+                </p>
+            </div>
+        </a>
     </div>
+</div>
 
-    <div class="col-sm-3"><a href="view_plan.php">
-            <div class="tile-stats tile-blue">
-                <div class="icon"><i class="entypo-rss"></i></div>
-                <div class="num" data-postfix="" data-duration="1500" data-delay="0">
-                    <h2>Planes de Entreno Disponibles</h2><br>
-                    <?php
+<div class="col-3">
+    <div class="card text-white bg-info mb-3" style="max-width: 20rem; height: 10rem;">
+    <a href="view_plan.php" style="text-decoration: none;">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h4 class="card-title">Planes de Entreno Disponibles</h4>
+            <p class="card-text">
+                <?php
                     $query = "select COUNT(*) from plan where active='yes'";
 
                     //echo $query;
@@ -98,10 +113,15 @@
                         }
                     }
                     $i = 1;
-                    ?>
-                </div>
-            </div></a>
+                ?>
+            </p>
+        </div>
+    </a>
     </div>
+</div>
+
+    
+
 </div>
 
 

@@ -7,7 +7,7 @@ page_protect();
 <html lang="en">
 <head>
 
-    <title>Club Social Rubgy | Nuevo Plan</title>
+    <title>Club Social Rugby | Nuevo Plan</title>
 	
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/dashboard.css">
@@ -69,8 +69,8 @@ page_protect();
 						</div>
 
 						<div class="form-group">
-							<input class="btn btn-info" type="submit" name="submit" id="submit" value="Crear Plan" >
-							<input class="btn btn-danger" type="reset" name="reset" id="reset" value="Borrar">
+							<input class="btn btn-outline-success" type="submit" name="submit" id="submit" value="Crear Plan" >
+							<input class="btn btn-outline-danger" type="reset" name="reset" id="reset" value="Borrar">
 
 						</div>
 					</form>

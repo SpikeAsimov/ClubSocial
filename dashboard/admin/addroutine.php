@@ -7,7 +7,7 @@ page_protect();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Club Social Rubgy | Crear Rutina</title>
+    <title>Club Social Rugby | Crear Rutina</title>
 
 
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -75,9 +75,9 @@ page_protect();
                   </div>
 
                   <div class="form-group col-12">
-                      <input class="btn btn-info " type="submit" name="submit" id="submit" value="Agregar Rutina" >
+                      <input class="btn btn-outline-success" type="submit" name="submit" id="submit" value="Agregar Rutina" >
 
-                      <input class="btn btn-dan" type="reset" name="reset" id="reset" value="Borrar">
+                      <input class="btn btn-outline-danger" type="reset" name="reset" id="reset" value="Borrar">
                   </div>
                   
                 </form>

@@ -6,7 +6,7 @@ page_protect();
 <html lang="es">
 <head>
 
-    <title>Club Social Rubgy | Nuevo Usuario</title>
+    <title>Club Social Rugby | Nuevo Usuario</title>
 
 
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
@@ -27,8 +27,8 @@ page_protect();
 
                   <div class="col-10 p-3">
                       <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="new_entry.php">Usuarios</a></li>
-                          <li class="breadcrumb-item active">Nuevo Usuario</li>
+                          <li class="breadcrumb-item"><a href="new_entry.php">Socios</a></li>
+                          <li class="breadcrumb-item active">Nuevo Socio</li>
                       </ol>
 
                       <form class="row g-3" action="new_submit.php" method="post" name="form1">

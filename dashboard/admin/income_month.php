@@ -59,7 +59,7 @@ if (mysqli_affected_rows($con) != 0) {
 
                 echo "<td>" . $row['amount'] . "</td>";
 
-                echo "<td>" . $row['validity'] . " Month</td>";
+                echo "<td>" . $row['validity'] . " Mes</td>";
                 
                 $totalamount=$totalamount+$row['amount'];
                 $sno++;

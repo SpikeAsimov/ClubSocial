@@ -1,5 +1,3 @@
-		
-
 <?php
 require '../../include/db_conn.php';
 page_protect();
@@ -9,115 +7,64 @@ page_protect();
 <!DOCTYPE html>
 <html lang="es">
 <head>
+	
+    <title>Club Social Rugby | Historial del Socio</title>
 
-    <title>ConfiguroWeb | Historial de Miembro</title>
-   	<link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-<link href="a1style.css" rel="stylesheet" type="text/css">     
-    <style>
-    	.page-container .sidebar-menu #main-menu li#hassubopen > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
+	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/dashboard.css">
 
-    </style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Arroyo Walter">
 
 
 </head>
-   <body class="page-body  page-fade" onload="collapseSidebar()">
+   <body>
+   		<?php include('elements/navbar.php'); ?>
 
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
-			
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.php">
-					<img src="https://www.arroyowalter.site/SistemaClubSocial/images/Logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-							
-			
-		
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
+    	<div class="container-fluid">
+			<div class="row">
+				<?php include 'nav_.php'; ?>
 
+				<div class="col-10 p-3">
+					<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="read_member.php">Historial</a></li>
+								<li class="breadcrumb-item active">Socio: <?php echo $_POST['name']; ?></li>
+					</ol>
 
-    		<div class="main-content">
-		
-				<div class="row">
-					
-					<!-- Profile Info and Notifications -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
-					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
+					<h3>
+						Detalles de :  <?php
+						$id     = $_POST['name'];
+						$query  = "select * from users WHERE userid='$id'";
+						//echo $query;
+						$result = mysqli_query($con, $query);
+
+						if (mysqli_affected_rows($con) != 0) {
+							while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+								$name = $row['username'];
+								$memid=$row['userid'];
+								$gender=$row['gender'];
+								$mobile=$row['mobile'];
+								$email=$row['email'];
+								$joinon=$row['joining_date'];
+								echo $name;
+							}
+						}
+						?>
+
+					</h3>
+
 						
-						<ul class="list-inline links-list pull-right">
-
-							<li>Bienvenido <?php echo $_SESSION['full_name']; ?> 
-							</li>							
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-					
-				</div>
-
-		<h3>Historial de Miembro</h3>
-
-			Details of : - <?php
-			$id     = $_POST['name'];
-			$query  = "select * from users WHERE userid='$id'";
-			//echo $query;
-			$result = mysqli_query($con, $query);
-
-			if (mysqli_affected_rows($con) != 0) {
-			    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-			        $name = $row['username'];
-			        $memid=$row['userid'];
-			        $gender=$row['gender'];
-			        $mobile=$row['mobile'];
-			        $email=$row['email'];
-			        $joinon=$row['joining_date'];
-			        echo $name;
-			    }
-			}
-			?>
-
-		<hr />
-
-
-		
-		<table border=1>
+		<table class="table" border=1>
 			<thead>
-				<tr>
-					<th>ID Membresía</th>
-					<th>Nombre</th>
-					<th>Género</th>
-				    <th>Móvil</th>
-				    <th>Correo</th>
-					<th>Ingresó en</th>
+				<tr class="table-secondary">
+					<th scope="col">ID Membresía</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Género</th>
+				    <th scope="col">Móvil</th>
+				    <th scope="col">Correo</th>
+					<th scope="col">Ingresó en</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -144,17 +91,17 @@ page_protect();
 
 				<h3>Historial de Pago de: <?php echo $name;?></h3>
 
-		<table border=1>
+		<table class="table" border=1>
 			<thead>
-				<tr>
-					<th>Sl.No</th>
-					<th>Nombre de Plan</th>
-					<th>Descuento de Plan</th>
-					<th>Validez</th>
-					<th>Monto</th>
-					<th>Fecha de Pago</th>
-					<th>Fecha de Expiración</th>
-					<th>Acción</th>
+				<tr class="table-secondary">
+					<th scope="col">Sl.No</th>
+					<th scope="col">Nombre de Plan</th>
+					<th scope="col">Descuento de Plan</th>
+					<th scope="col">Validez</th>
+					<th scope="col">Monto</th>
+					<th scope="col">Fecha de Pago</th>
+					<th scope="col">Fecha de Expiración</th>
+					<th scope="col">Acción</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -190,7 +137,7 @@ page_protect();
 						        $sno++;
 						    }
 						        
-						        echo '<td><a href="gen_invoice.php?id='.$row['uid'].'&pid='.$row['pid'].'&etid='.$row['et_id'].'"><input type="button" class="a1-btn a1-blue" value="Memo" ></a></td></tr>';
+						        echo '<td><a href="gen_invoice.php?id='.$row['uid'].'&pid='.$row['pid'].'&etid='.$row['et_id'].'"><input type="button" class="btn btn-info" value="Memo" ></a></td></tr>';
 						        $memid = 0;
 						    }
 						    
@@ -199,6 +146,14 @@ page_protect();
 					?>							
 				</tbody>
 		</table>
+
+
+				</div>
+			</div>
+		</div>
+				
+
+	
 
 
 			<?php include('footer.php'); ?>

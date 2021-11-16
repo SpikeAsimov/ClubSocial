@@ -8,7 +8,7 @@ page_protect();
 <html lang="es">
 <head>
 
-    <title>ConfiguroWeb | Registros por Mes</title>
+    <title>Club Social Rubgy | Registros por Mes</title>
 
     
 			
@@ -88,7 +88,7 @@ page_protect();
 
 					</form>
 
-					<table class="table table-hover table-bordered datatable"  id="memmonth"border=2 style="font-size:15px;">
+					<table class="table table-hover table-bordered datatable"  id="memmonth" border=2 style="font-size:15px;">
 						
 					</table>
 

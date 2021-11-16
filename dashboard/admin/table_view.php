@@ -35,7 +35,7 @@ page_protect();
 					</ol>
 			
 
-			<table class="table table-bordered datatable" id="table-1" border=1>
+			<table class="table table-hover table-bordered datatable" id="table-1" border=1>
 			<thead>
 				<tr><h2>
 					<th>Sl.No</th>

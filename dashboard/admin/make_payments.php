@@ -24,160 +24,82 @@ if (isset($_POST['userID']) && isset($_POST['planID'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 
-    <title>Club Social Rubgy | Registrar Pago</title>
-     <link rel="stylesheet" href="../../css/style.css"  id="style-resource-5">
-    <script type="text/javascript" src="../../js/Script.js"></script>
-    <link rel="stylesheet" href="../../css/dashMain.css">
-    <link rel="stylesheet" type="text/css" href="../../css/entypo.css">
-    <link href="a1style.css" type="text/css" rel="stylesheet">
-    <style>
-    	.page-container .sidebar-menu #main-menu li#paymnt > a {
-    	background-color: #2b303a;
-    	color: #ffffff;
-		}
-	#boxx
-	{
-		width:220px;
-	}
-   </style>
+    <title>Club Social Rugby | Registrar Pago</title>
+
+				
+	<link rel="stylesheet" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../css/dashboard.css">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Arroyo Walter">
+
 </head>
-   <body class="page-body  page-fade" onload="collapseSidebar()">
+   <body>
 
-    	<div class="page-container sidebar-collapsed" id="navbarcollapse">	
-	
-		<div class="sidebar-menu">
-	
-			<header class="logo-env">
-			
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.php">
-					<img src="https://www.arroyowalter.site/SistemaClubSocial/images/Logo.png" alt="" width="192" height="80" />
-				</a>
-			</div>
-			
-					<!-- logo collapse icon -->
-					<div class="sidebar-collapse" onclick="collapseSidebar()">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
+   		<?php include('elements/navbar.php'); ?>
+
+		   <div class="container-fluid">
+			   <div class="row">
+			   		<?php include 'nav_.php'; ?>
+
+					   <div class="col-10 p-3">
+							<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="revenue_month.php">Vistas</a></li>
+									<li class="breadcrumb-item active">Registros por Mes</li>
+							</ol>			
+
+							<form id="form1" name="form1" method="post" class="row" action="submit_payments.php">
+								<legend>REGISTRAR PAGO</legend>
+								<div class="form-group col-12">
+									<h5 for="" class="form-label mt-0">ID MEMBRESIA</h5>
+									<input type="text" class="form-control-plaintext" name="m_id" id="" value="<?php echo $uid; ?>" readonly>
+
+									<label for="" class="form-label mt-3">NOMBRE Y APELLIDO</label>
+									<input type="text" name="u_name" class="form-control" id="" value="<?php echo $name; ?>" readonly>
+
+									<label for="" class="form-label mt-3">PLAN ACTUAL</label>
+									<input type="text" class="form-control" name="prevPlan" id="boxx" value="<?php echo $planName; ?>" readonly>
+
+									<label for="" class="form-label mt-3">SELECCIONAR NUEVO PLAN</label>									
+									<select name="plan" class="form-select" id="boxx" required onchange="myplandetail(this.value)">
+													<option value="">-- Seleccionar --</option>
+													<?php
 							
-			
-		
-			</header>
-    		<?php include('nav.php'); ?>
-    	</div>
+														$query = "select * from plan where active='yes'";
+														
+														//echo $query;
+														$result = mysqli_query($con, $query);
+														
+														if (mysqli_affected_rows($con) != 0) {
+															while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+																echo "<option value=" . $row['pid'] . ">" . $row['planName'] . "</option>";
+																
+															}
+														}
+														
+													?>
+									</select>
+
+									
+									<table class="table table-hover" id="plandetls">
+									</table>
+
+									<input class="btn btn-outline-success" type="submit" name="submit" id="submit" value="AGREGAR PAGO" >
+									<input class="btn btn-outline-danger" type="reset" name="reset" id="reset" value="Borrar"></td>
 
 
-    		<div class="main-content">
-		
-				<div class="row">
-					
-					<!-- Profile Info and Notifications -->
-					<div class="col-md-6 col-sm-8 clearfix">	
-							
-					</div>
-					
-					
-					<!-- Raw Links -->
-					<div class="col-md-6 col-sm-4 clearfix hidden-xs">
-						
-						<ul class="list-inline links-list pull-right">
+								</div>
+								
+							</form>
 
-						<li>Bienvenid@ <?php echo $_SESSION['full_name']; ?> 
-							</li>					
-						
-							<li>
-								<a href="logout.php">
-									Cerrar Sesión <i class="entypo-logout right"></i>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-					
-				</div>
+					   </div>
 
-		<h3>Hacer Pago</h3>
-
-		<hr />
-
-		
-		
-		
-		
-		
-		<div class="a1-container a1-small a1-padding-32" style="margin-top:2px; margin-bottom:2px;">
-        <div class="a1-card-8 a1-light-gray" style="width:500px; margin:0 auto;">
-		<div class="a1-container a1-dark-gray a1-center">
-        	<h6>HACER PAGO</h6>
-        </div>
-       <form id="form1" name="form1" method="post" class="a1-container" action="submit_payments.php">
-         <table width="100%" border="0" align="center">
-         <tr>
-           <td height="35"><table width="100%" border="0" align="center">
-           	 <tr>
-           	   <td height="35">ID MEMBRESÍA:</td>
-           	   <td height="35"><input type="text" name="m_id" id="boxx" value="<?php echo $uid; ?>" readonly/></td>
-         	   </tr>
-			   
-			   <tr>
-               <td height="35">NOMBRE:</td>
-               <td height="35"><input type="text" name="u_name" id="boxx" value="<?php echo $name; ?>" placeholder="Member Name" maxlength="30" readonly/>
-                 
-             </tr>
-             <tr>
-               <td height="35">PLAN ACTUAL</td>
-               <td height="35"><input type="text" name="prevPlan" id="boxx" value="<?php echo $planName; ?>" readonly></td></td>
-             </tr>
-             <tr>
-               <td height="35">SELECCIONAR NUEVO PLAN:</td>
-               <td height="35"><select name="plan" id="boxx" required onchange="myplandetail(this.value)">
-							<option value="">-- Favor Seleccionar --</option>
-							<?php
-    
-							    $query = "select * from plan where active='yes'";
-							    
-							    //echo $query;
-							    $result = mysqli_query($con, $query);
-							    
-							    if (mysqli_affected_rows($con) != 0) {
-							        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-							            echo "<option value=" . $row['pid'] . ">" . $row['planName'] . "</option>";
-							            
-							        }
-							    }
-							    
-							?>
-						</select></td></td>
-             </tr>
-             
-		   
-            
-             <tr>
-			  <table id="plandetls">
-             </table>
-			 
-            
-           </table></td>
-		   
-         </tr>
-		  <tr>
-               <td height="35">&nbsp;</td>
-               <td height="35">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; <input class="a1-btn a1-blue" type="submit" name="submit" id="submit" value="AGREGAR PAGO" >
-                 <input class="a1-btn a1-blue" type="reset" name="reset" id="reset" value="Borrar"></td>
-             </tr>
-         </table>
-       </form>
-    </div>
-    </div>   
-		
-		
-		
+			   </div>
 		
 
 		<?php include('footer.php'); ?>
